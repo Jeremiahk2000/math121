@@ -1,0 +1,31 @@
+---
+title: "visualizations"
+author: "Jeremiah Kim"
+date: "12/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(readr)
+library(skimr)
+
+ex1 <- read_csv("kinematics_data.csv") %>% rename("time" = "# Time Data", "lin" = "X Data", "quad" = "Y Data")
+ex2 <- read_csv("quantum_data.csv") %>% rename("Position" = "# X Data", "Wavefunction" = "Psi Data")
+ex3 <- read_csv("taylor_data.csv") %>% rename("X" = "# X Data", "Cosine" = "Cosine Data")
+```
+
+```{r, Scatterplots}
+ex3 %>% ggplot(aes(x= X, y = Cosine)) +
+  geom_point() + theme_classic() +
+  labs(title = "Position v. Cosine value", subtitle = "Taylor Polynomial for Cosine")
+
+ggsave("ex3_cos.png", plot = last_plot())
+
+```
+
+
+
